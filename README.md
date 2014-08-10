@@ -9,6 +9,7 @@ At this point, this is really just to see if a Dockerfile would be useful.
 ### Background
 
 There are two existing repos which contain working images for both Debian and Ubuntu:
+
 * [Docker for R on Debian repo](https://github.com/eddelbuettel/docker-debian-r) 
 * [Docker for R on Ubuntu repo](https://github.com/eddelbuettel/docker-ubuntu-r) 
 
@@ -19,6 +20,10 @@ R.
 
 * add Anaconda: default install starts from a 300mb which seems like overkill
 * add Python IDEs: with Wing or PyCharm; both have installers; or just Spyder?
+* add RStudio Desktop?
+* add RStudio Server and export port 8787?
+* add X11 exporters as [described here](http://blog.docker.com/2013/07/docker-desktop-your-desktop-over-ssh-running-inside-of-a-docker-container/) ?
+
 
 ### Docker Hub
 
