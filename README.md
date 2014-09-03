@@ -13,7 +13,7 @@ There are two existing repos which contain working images for both Debian and Ub
 * [Docker for R on Debian repo](https://github.com/eddelbuettel/docker-debian-r) 
 * [Docker for R on Ubuntu repo](https://github.com/eddelbuettel/docker-ubuntu-r) 
 
-We are starting here from the base image in the Ubunto as it already contains
+We are starting here from the base image in the Ubuntu as it already contains
 R.
 
 ### Possible TODOs
