@@ -1,30 +1,34 @@
 ## Emacs, make this -*- mode: makefile; -*-
-## start with the Ubuntu docker-ubuntu-r/add-r which has R on top of the latest Ubuntu
-FROM eddelbuettel/docker-ubuntu-r:add-r
+## Provides RStudio-server on 8787 and IPython-notebooks on 8888
 
-## That's me
-MAINTAINER Dirk Eddelbuettel edd@debian.org
+FROM eddelbuettel/debian-rstudio
+MAINTAINER Carl Boettiger cboettig@ropensci.org
 
 ## Remain current
-RUN apt-get update -qq
-RUN apt-get dist-upgrade -y
+RUN apt-get update -qq \
+&& apt-get dist-upgrade -y
 
-## And components -- we do this in separate commands as each 'RUN' gets
-## mapped to a different AUFS layer and container component file
+## Packages 
+RUN apt-get install -y --no-install-recommends python ipython \
+ipython-notebook python-matplotlib python-numpy python-scipy \
+python-statsmodels git sqlite3
 
-## Python
-RUN apt-get install -y --no-install-recommends python
-RUN apt-get install -y --no-install-recommends ipython
-RUN apt-get install -y --no-install-recommends ipython-notebook
-RUN apt-get install -y --no-install-recommends python-matplotlib
-RUN apt-get install -y --no-install-recommends python-numpy
-RUN apt-get install -y --no-install-recommends python-scipy
-RUN apt-get install -y --no-install-recommends python-statsmodels
+# iPython Notebook port
+EXPOSE 8888
+## We need a modifed supervisord.conf to run ipython on the container 
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-## Git
-RUN apt-get install -y --no-install-recommends git
+## Create a user 
+RUN adduser --disabled-password --gecos '' swc
+RUN adduser swc sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN chown swc:swc /var/log/supervisor 
+USER swc
+WORKDIR /home/swc
 
-## SQL(ite)
-RUN apt-get install -y --no-install-recommends sqlite3
+## To have a container run multiple & persistent tasks, we use the very simple supervisord as recommended in Docker documentation.
+ENTRYPOINT ["/usr/bin/sudo"]
+CMD ["/usr/bin/supervisord"] 
+
 
 

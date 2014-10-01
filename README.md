@@ -6,22 +6,38 @@ defines an image with software used in Software Carpentry bootcamps.
 
 At this point, this is really just to see if a Dockerfile would be useful.
 
-### Background
+### Getting Started
 
-There are two existing repos which contain working images for both Debian and Ubuntu:
+- [Install Docker for your system](https://docs.docker.com/installation)
 
-* [Docker for R on Debian repo](https://github.com/eddelbuettel/docker-debian-r) 
-* [Docker for R on Ubuntu repo](https://github.com/eddelbuettel/docker-ubuntu-r) 
+- Run:
 
-We are starting here from the base image in the Ubuntu as it already contains
-R.
+```bash
+docker run -d -p 8888:8888 -p 8787:8787 --name swc cboettig/swc
+```
+- boot2docker users (Mac/Windows): run: `boot2docker ip` to get the IP address (`<ip>` below).  Linux users can just use `localhost`.
+
+- For RStudio Server, go to: `http://<ip>:8787`
+- For an iPython Notebook, go to: `http://<ip>:8888`
+
+- For a bash terminal, instead do:
+
+```bash
+docker run --rm -it cboettig/swc /bin/bash
+```
+To save your work:
+
+```bash
+docker commit swc user/swc
+```
+
+Note  that `swc` is the name we gave when running the container above, while `user/swc` can be any name you choose for your saved image.  Use this name in future in place of `cboettig/swc` to launch
+your saved container.
 
 ### Possible TODOs
 
 * add Anaconda: default install starts from a 300mb which seems like overkill
 * add Python IDEs: with Wing or PyCharm; both have installers; or just Spyder?
-* add RStudio Desktop?
-* add RStudio Server and export port 8787?
 * add X11 exporters as [described here](http://blog.docker.com/2013/07/docker-desktop-your-desktop-over-ssh-running-inside-of-a-docker-container/) ?
 
 
@@ -33,15 +49,11 @@ and one can retrieve the corresponding images via a standard `docker pull`.
 
 ### See Also
 
-There are also corresponding 
-[Docker for R on Ubuntu](https://github.com/eddelbuettel/docker-ubuntu-r) 
-and
-[Docker for R on Debian](https://github.com/eddelbuettel/docker-debian-r) 
-repos I maintain. 
+There are more images available for [Docker for R](https://github.com/eddelbuettel/rocker).
 
-### Author
+### Authors
 
-Dirk Eddelbuettel
+Carl Boettiger & Dirk Eddelbuettel
 
 ### License
 
