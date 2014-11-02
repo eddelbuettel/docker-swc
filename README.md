@@ -1,5 +1,21 @@
 
-## Docker for Software Carpentry
+## Note
+
+This repo was somewhat experimental and predates further work by
+Carl and Dirk in the [Rocker](https://github.com/rocker-org) organization
+and its repositories. Please see the core
+[rocker](https://github.com/rocker-org/rocker) repository (providing
+containers for base R, R and RStudio as well R-devel builds) as well as the
+associated other containers such as
+[Hadleyverse](https://github.com/rocker-org/hadleyverse) or
+[rOpenSci](https://github.com/rocker-org/ropensci).
+
+If there is interest we may revive this RStudio _and_ iPython/Jupyter
+container within the [Rocker](https://github.com/rocker-org) organization.
+
+Older notes remain below.
+
+### Docker for Software Carpentry
 
 This repository contains a (at this point very speculative) Dockerfile which
 defines an image with software used in Software Carpentry bootcamps.
