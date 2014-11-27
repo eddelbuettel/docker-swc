@@ -1,17 +1,26 @@
 ## Emacs, make this -*- mode: makefile; -*-
 ## Provides RStudio-server on 8787 and IPython-notebooks on 8888
 
-FROM eddelbuettel/debian-rstudio
-MAINTAINER Carl Boettiger cboettig@ropensci.org
+FROM rocker/rstudio
+
+## This handle reaches Carl and Dirk
+MAINTAINER "Carl Boettiger and Dirk Eddelbuettel" rocker-maintainers@eddelbuettel.com
 
 ## Remain current
 RUN apt-get update -qq \
 && apt-get dist-upgrade -y
 
 ## Packages 
-RUN apt-get install -y --no-install-recommends python ipython \
-ipython-notebook python-matplotlib python-numpy python-scipy \
-python-statsmodels git sqlite3
+RUN apt-get install -y --no-install-recommends \
+  git \
+  ipython \
+  ipython-notebook \
+  python \
+  python-matplotlib \
+  python-numpy \
+  python-scipy \
+  python-statsmodels \
+  sqlite3
 
 # iPython Notebook port
 EXPOSE 8888
